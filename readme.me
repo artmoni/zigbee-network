@@ -1,0 +1,10 @@
+Troubleshoot :
+
+	Walkthrough:
+
+
+	Error : java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path
+	Need to export the library path.
+		export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jni/
+	execute maven project.
+		mvn exec:java
