@@ -9,7 +9,7 @@ public class Main {
 	static XBee xbee = new XBee();
 	
 	public static void main (String[] args) throws XBeeException{
-
+		system.out.println("test");
 		xbee.open(MY_PORT, 9600);
 		System.out.println("test");
 		
