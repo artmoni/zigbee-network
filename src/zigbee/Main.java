@@ -20,12 +20,9 @@ public class Main {
 		while (true) {
 			if (response.getApiId() == ApiId.ZNET_IO_SAMPLE_RESPONSE) {
 				ZNetRxIoSampleResponse ioSample = (ZNetRxIoSampleResponse) response;
-				System.out.println("RESPONSE "+ ioSample);
-				System.out.println("Received a sample from " + ioSample.getRemoteAddress64());
-				
-
-				System.out.println("Analog D0 (pin 20) 10-bit reading is " + ioSample.getAnalog0());
-				System.out.println("Digital D4 (pin 11) is " + (ioSample.isD4On() ? "on" : "off"));
+				//System.out.println("Received a sample from " + ioSample.getRemoteAddress64());	
+				//System.out.println("Analog D0 (pin 20) 10-bit reading is " + ioSample.getAnalog0());
+				//System.out.println("Digital D4 (pin 11) is " + (ioSample.isD4On() ? "on" : "off"));
 			}
 		}
 	}
