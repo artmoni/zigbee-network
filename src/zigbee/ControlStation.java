@@ -11,6 +11,7 @@ public class ControlStation {
 	static private XBee xbee = new XBee();
 	
 	public static void run () throws XBeeException {
+		System.out.println("plouf");
 		xbee.open(MY_PORT, 9600);
 		loop();
 	}
