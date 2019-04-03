@@ -15,13 +15,14 @@ public class ControlStation {
 	private XBee xbee = new XBee();
 	private HashMap<XBeeAddress64, Sensor> sensors = new HashMap<XBeeAddress64, Sensor>();
 	
-	public void run () throws XBeeException {
+	public void run () {
 		try {
 			xbee.open(MY_PORT, 9600);
+			loop();
 		}catch(Exception e) {
 			System.out.println("Error on opening port");
 		}
-		loop();
+		
 	}
 	
 	public void loop () throws XBeeException {

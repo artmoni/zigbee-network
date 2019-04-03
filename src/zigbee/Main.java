@@ -1,12 +1,9 @@
 package zigbee;
 
-import java.io.IOException;
-
-import com.rapplogic.xbee.api.XBeeException;
-
+import zigbee.ControlStation;
 public class Main {
 	
-	public static void main(String[] args) throws XBeeException, IOException{
+	public static void main(String[] args) {
 		ControlStation controlStation = new ControlStation();
         controlStation.run();
     }
