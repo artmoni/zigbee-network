@@ -21,6 +21,8 @@ public class ControlStation {
 			loop();
 		}catch(Exception e) {
 			System.out.println("Error on opening port");
+			System.out.println(e.getMessage());
+			
 		}
 		
 	}
