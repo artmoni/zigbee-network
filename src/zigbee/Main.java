@@ -7,6 +7,7 @@ import com.rapplogic.xbee.api.XBeeException;
 public class Main {
 	
 	public static void main(String[] args) throws XBeeException, IOException{
-        ControlStation.run();
+		ControlStation controlStation = new ControlStation();
+        controlStation.run();
     }
 }

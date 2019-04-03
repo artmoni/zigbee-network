@@ -1,25 +1,39 @@
 package zigbee;
 
+import java.util.HashMap;
+
 import com.rapplogic.xbee.api.ApiId;
 import com.rapplogic.xbee.api.XBee;
+import com.rapplogic.xbee.api.XBeeAddress64;
 import com.rapplogic.xbee.api.XBeeException;
 import com.rapplogic.xbee.api.XBeeResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetRxIoSampleResponse;
 
 public class ControlStation {
-	final static private String MY_PORT = "/dev/ttyUSB0"; 
-	static private XBee xbee = new XBee();
+	//final static private String MY_PORT = "/dev/ttyUSB0"; 
+	final static private String MY_PORT = "SLAB_USBtoUART"; 
+	private XBee xbee = new XBee();
+	private HashMap<XBeeAddress64, Sensor> sensors = new HashMap<XBeeAddress64, Sensor>();
 	
-	public static void run () throws XBeeException {
-		xbee.open(MY_PORT, 9600);
+	public void run () throws XBeeException {
+		try {
+			xbee.open(MY_PORT, 9600);
+		}catch(Exception e) {
+			System.out.println("Error on opening port");
+		}
 		loop();
 	}
 	
-	public static void loop () throws XBeeException {
+	public void loop () throws XBeeException {
 		while (true) {
 			XBeeResponse response = xbee.getResponse();
 			if(response.getApiId() == ApiId.ZNET_IO_SAMPLE_RESPONSE) {
 				ZNetRxIoSampleResponse ioSample = (ZNetRxIoSampleResponse) response;
+				if(!sensors.containsKey(ioSample.getRemoteAddress64())) {
+					Sensor sensor = new Sensor(ioSample.getRemoteAddress64());
+					sensors.put(ioSample.getRemoteAddress64(), sensor);
+					System.out.println("Sensor added");
+				}
 
 			    System.out.println("RESPONSE "+ ioSample);
 				System.out.println("Received a sample from " + ioSample.getRemoteAddress64());
