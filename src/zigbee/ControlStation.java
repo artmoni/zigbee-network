@@ -16,6 +16,9 @@ public class ControlStation {
 		loop();
 	}
 	
+	
+	
+	
 	public static void loop () throws XBeeException {
 		while (true) {
 			XBeeResponse response = xbee.getResponse();
