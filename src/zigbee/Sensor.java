@@ -14,7 +14,7 @@ public class Sensor {
 		return sensorAddress;
 	}
 
-	public void setAddress(XBeeAddress64 sensorAddress) {
+	public void setAddress(XBeeAddress64  sensorAddress) {
 		this.sensorAddress = sensorAddress;
 	}
 	

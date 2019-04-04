@@ -8,12 +8,13 @@ import com.rapplogic.xbee.api.XBeeAddress64;
 import com.rapplogic.xbee.api.XBeeException;
 import com.rapplogic.xbee.api.XBeeResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetRxIoSampleResponse;
+import org.json.JSONObject;
 
 public class ControlStation {
-	//final static private String MY_PORT = "/dev/ttyUSB0"; 
-	final static private String MY_PORT = "SLAB_USBtoUART"; 
+	final static private String MY_PORT = "/dev/ttyUSB0"; 
+	//final static private String MY_PORT = "SLAB_USBtoUART"; 
 	private XBee xbee = new XBee();
-	private HashMap<XBeeAddress64, Sensor> sensors = new HashMap<XBeeAddress64, Sensor>();
+	private HashMap< XBeeAddress64, Sensor> sensors = new HashMap< XBeeAddress64, Sensor>();
 	
 	public void run () {
 		try {
@@ -22,7 +23,6 @@ public class ControlStation {
 		}catch(Exception e) {
 			System.out.println("Error on opening port");
 			System.out.println(e.getMessage());
-			
 		}
 		
 	}
@@ -37,12 +37,27 @@ public class ControlStation {
 					sensors.put(ioSample.getRemoteAddress64(), sensor);
 					System.out.println("Sensor added");
 				}
+					
+					System.out.println("Hello sensor :)  "+ioSample.getRemoteAddress64());
+					StoreData store = new StoreData();
+					//store.storeData(sensors.get(ioSample.getRemoteAddress64()).getAddress())
+					try{
+						System.out.println("In try");
+						JSONObject result  = store.storeData(ioSample.getRemoteAddress64());
+					//	JSONObject result  = store.storeData();
+						System.out.println(result);
+							
+							
+					}catch(Exception e){
+					
+					}
+					
 
-			    System.out.println("RESPONSE "+ ioSample);
-				System.out.println("Received a sample from " + ioSample.getRemoteAddress64());
+			        //System.out.println("RESPONSE "+ ioSample);
+				//System.out.println("Received a sample from " + ioSample.getRemoteAddress64());
 				
-				System.out.println("Analog D0 (pin 20) 10-bit reading is " + ioSample.getAnalog0());
-				System.out.println("Digital D4 (pin 11) is " + (ioSample.isD4On() ? "on" : "off"));
+				//System.out.println("Analog D0 (pin 20) 10-bit reading is " + ioSample.getAnalog0());
+				//System.out.println("Digital D4 (pin 11) is " + (ioSample.isD4On() ? "on" : "off"));
 			}
 		    
 		}
